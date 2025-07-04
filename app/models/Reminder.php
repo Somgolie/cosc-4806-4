@@ -8,7 +8,7 @@ class Reminder {
 
     public function get_reminders () {
       $db = db_connect();
-      $statement = $db->prepare("select W* from reminders;");
+      $statement = $db->prepare("select * from reminders;");
       $statement->execute();
       $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
       return $rows;
