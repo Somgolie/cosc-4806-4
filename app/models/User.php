@@ -55,6 +55,7 @@ class User {
       if ($user && password_verify($password, $user['password'])) {
           $_SESSION['auth'] = 1;
           $_SESSION['username'] = ucwords($username);
+          $_SESSION['user_id'] = $user['id'];
           unset($_SESSION['failedAuth']);
           $this->log_attempt($username, true);
           header('Location: /home');
