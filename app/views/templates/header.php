@@ -37,7 +37,7 @@ if (!isset($_SESSION['auth'])) {
             <li><a class="dropdown-item" href="#">Action 1</a></li>
             <li><a class="dropdown-item" href="#">Action 2</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Reminder List</a></li>
+            <li><a class="dropdown-item" href="reminders">Reminder List</a></li>
           </ul>
         </li>
         <li class="nav-item">
