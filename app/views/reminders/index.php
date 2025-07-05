@@ -28,7 +28,7 @@
                     <p class="card-text">
                         Created at: <?php echo htmlspecialchars($reminder['time_created']); ?>
                     </p>
-                    <a href="#" class="btn btn-primary">Update</a>
+                    <a href="/reminders/edit/<?php echo htmlspecialchars($reminder['id']); ?>" class="btn btn-primary">Update</a>
                     <a href="#" class="btn btn-danger">Delete</a>
                 </div>
             </div>
