@@ -47,11 +47,14 @@ class Reminder {
       return $stmt->execute();
   }
   public function mark_completed($id, $completed) {
-        $db = db_connect();
-        $stmt = $db->prepare("UPDATE notes SET completed = :completed WHERE id = :id");
-        $stmt->bindParam(':completed', $completed, PDO::PARAM_INT);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
+      $db = db_connect();
+      if ($completed) {
+          $stmt = $db->prepare("UPDATE notes SET completed = 1, time_completed = NOW() WHERE id = :id");
+      } else {
+          $stmt = $db->prepare("UPDATE notes SET completed = 0, time_completed = NULL WHERE id = :id");
+      }
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      return $stmt->execute();
     }
 }
 ?>
