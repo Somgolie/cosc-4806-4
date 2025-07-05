@@ -41,7 +41,7 @@ if (!isset($_SESSION['auth'])) {
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link" href="reminders">Reminder List</a>
         </li>
       </ul>
     </div>
