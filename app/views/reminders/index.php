@@ -29,7 +29,7 @@
                         Created at: <?php echo htmlspecialchars($reminder['time_created']); ?>
                     </p>
                     <a href="/reminders/edit/<?php echo htmlspecialchars($reminder['id']); ?>" class="btn btn-primary">Update</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="/reminders/delete/<?php echo htmlspecialchars($reminder['id']); ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reminder?');">Delete</a>
                 </div>
             </div>
             <?php

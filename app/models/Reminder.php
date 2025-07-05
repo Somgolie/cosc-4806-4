@@ -37,5 +37,11 @@ class Reminder {
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       return $stmt->execute();
   }
+  public function delete_reminder($id) {
+      $db = db_connect();
+      $stmt = $db->prepare("DELETE FROM reminders WHERE id = :id");
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      return $stmt->execute();
+  }
 }
 ?>
