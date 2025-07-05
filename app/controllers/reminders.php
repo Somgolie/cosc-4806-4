@@ -102,4 +102,32 @@ class reminders extends Controller{
       header('Location: /reminders');
       exit;
   }
+
+    public function mark_complete($id) {
+        session_start();
+        $user_id = $_SESSION['user_id'] ?? null;
+        if (!$user_id) {
+            header('Location: /login');
+            exit;
+        }
+
+        $reminderModel = $this->model('Reminder');
+        $reminder = $reminderModel->get_reminder_by_id($id);
+
+        if (!$reminder || $reminder['user_id'] != $user_id) {
+            $_SESSION['complete_message'] = "Reminder not found or access denied.";
+            header('Location: /reminders');
+            exit;
+        }
+
+        
+        $newCompleted = $reminder['completed'] ? 0 : 1;
+        $reminderModel->mark_completed($id, $newCompleted);
+
+        $_SESSION['complete_message'] = $newCompleted 
+            ? "Reminder marked as complete!" 
+            : "Reminder marked as incomplete!";
+        header('Location: /reminders');
+        exit;
+    }
 }
