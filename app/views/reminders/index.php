@@ -22,7 +22,7 @@
         if ($reminder['user_id'] == $user_id) {
             $found = true;
             ?>
-            <div class="card mb-3">
+            <div class="card mb-3 bg-info bg-opacity-10">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo htmlspecialchars($reminder['subject']); ?></h5>
                     <p class="card-text">
