@@ -17,7 +17,10 @@ class Reminder {
 
     public function create_reminder($user_id, $subject) {
         $db = db_connect();
-        $stmt = $db->prepare("INSERT INTO notes (user_id, subject, time_created) VALUES (:user_id, :subject, NOW())");
+        $stmt = $db->prepare("
+            INSERT INTO notes (user_id, subject, time_created, completed) 
+            VALUES (:user_id, :subject, NOW(), 0)
+        ");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':subject', $subject, PDO::PARAM_STR);
         return $stmt->execute();
@@ -43,5 +46,12 @@ class Reminder {
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       return $stmt->execute();
   }
+  public function mark_completed($id, $completed) {
+        $db = db_connect();
+        $stmt = $db->prepare("UPDATE notes SET completed = :completed WHERE id = :id");
+        $stmt->bindParam(':completed', $completed, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>
