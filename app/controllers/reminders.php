@@ -32,4 +32,23 @@ class reminders extends Controller{
       header('Location: /reminders');
       exit;
   }
+  public function edit($id) {
+      session_start();
+      $user_id = $_SESSION['user_id'] ?? null;
+      if (!$user_id) {
+          header('Location: /login');
+          exit;
+      }
+
+      $reminderModel = $this->model('Reminder');
+      $reminder = $reminderModel->get_reminder_by_id($id);
+
+      if (!$reminder || $reminder['user_id'] != $user_id) {
+          $_SESSION['edit_message'] = "Reminder not found or access denied.";
+          header('Location: /reminders');
+          exit;
+      }
+
+      $this->view('reminders/edit', ['reminder' => $reminder]);
+  }
 }
