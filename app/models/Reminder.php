@@ -14,10 +14,7 @@ class Reminder {
       return $rows;
     }
 
-    public function update_reminder ($reminder_id) {
-      $db = db_connect();
 
-    }
     public function create_reminder($user_id, $subject) {
         $db = db_connect();
         $stmt = $db->prepare("INSERT INTO reminders (user_id, subject, time_created) VALUES (:user_id, :subject, NOW())");
@@ -25,5 +22,20 @@ class Reminder {
         $stmt->bindParam(':subject', $subject, PDO::PARAM_STR);
         return $stmt->execute();
     }
+  public function get_reminder_by_id($id) {
+      $db = db_connect();
+      $stmt = $db->prepare("SELECT * FROM reminders WHERE id = :id");
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      $stmt->execute();
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function update_reminder($id, $subject) {
+      $db = db_connect();
+      $stmt = $db->prepare("UPDATE reminders SET subject = :subject WHERE id = :id");
+      $stmt->bindParam(':subject', $subject, PDO::PARAM_STR);
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      return $stmt->execute();
+  }
 }
 ?>
