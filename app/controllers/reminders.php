@@ -51,4 +51,33 @@ class reminders extends Controller{
 
       $this->view('reminders/edit', ['reminder' => $reminder]);
   }
+  public function update($id) {
+      
+      $user_id = $_SESSION['user_id'] ?? null;
+      if (!$user_id) {
+          header('Location: /login');
+          exit;
+      }
+
+      $subject = trim($_POST['subject'] ?? '');
+      if ($subject === '') {
+          $_SESSION['edit_message'] = "Subject cannot be empty.";
+          header("Location: /reminders/edit/$id");
+          exit;
+      }
+
+      $reminderModel = $this->model('Reminder');
+      $reminder = $reminderModel->get_reminder_by_id($id);
+
+      if (!$reminder || $reminder['user_id'] != $user_id) {
+          $_SESSION['edit_message'] = "Reminder not found or access denied.";
+          header('Location: /reminders');
+          exit;
+      }
+
+      $reminderModel->update_reminder($id, $subject);
+      $_SESSION['edit_message'] = "Reminder updated successfully!";
+      header('Location: /reminders');
+      exit;
+  }
 }
