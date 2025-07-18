@@ -1,11 +1,30 @@
 <?php
 class Reports extends Controller {
-  public function index() {
-    session_start();
+    public function index() {
+        session_start();
 
-    $reminderModel = $this->model('Reminder');
-    $reminders = $reminderModel->get_reminders();  // assumes this returns all reminders
+        $db = db_connect();
+        $stmt = $db->query("SELECT id, username FROM users ORDER BY username ASC");
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $this->view('reports/index', ['reminders' => $reminders]);
-  }
+        $this->view('reports/index', ['users' => $users]);
+    }
+  
+
+    public function user($id) {
+        session_start();
+
+        $reminderModel = $this->model('Reminder');
+        $reminders = $reminderModel->get_reminders_by_user($id);
+
+        $db = db_connect();
+        $stmt = $db->prepare("SELECT username FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->view('reports/user_reminders', [
+            'reminders' => $reminders,
+            'username' => $user['username'] ?? 'Unknown'
+        ]);
+    }
 }

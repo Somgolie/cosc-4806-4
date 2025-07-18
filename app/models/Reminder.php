@@ -61,6 +61,16 @@ class Reminder {
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       return $stmt->execute();
     }
+    public function get_reminders_by_user($user_id) {
+        $db = db_connect();
+        $stmt = $db->prepare("
+            SELECT * FROM notes 
+            WHERE user_id = ? 
+            ORDER BY time_created DESC
+        ");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
  
 }
