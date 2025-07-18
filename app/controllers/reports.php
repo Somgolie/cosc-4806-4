@@ -54,4 +54,19 @@ class Reports extends Controller {
         'username' => $user['username'] ?? 'Unknown'
     ]);
   }
+    public function chart() {
+        session_start();
+        $db = db_connect();
+
+        // Get number of reminders per user
+        $stmt = $db->query("
+            SELECT users.username, COUNT(notes.id) AS reminder_count
+            FROM users
+            LEFT JOIN notes ON notes.user_id = users.id
+            GROUP BY users.username
+        ");
+        $reminderData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->view('reports/chart', ['reminderData' => $reminderData]);
+    }
 }
