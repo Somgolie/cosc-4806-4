@@ -56,5 +56,7 @@ class Reminder {
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       return $stmt->execute();
     }
+
+ 
 }
 ?>
