@@ -5,8 +5,8 @@
 
     <!-- Chart Always Visible -->
     <div class="mb-4">
-        <div class="card card-body" style="overflow-x: auto; min-height: 350px;">
-            <canvas id="reminderChart" height="100"></canvas>
+        <div class="card card-body" style="overflow-x: auto; min-height: 350px; max-width: 100%;">
+            <canvas id="reminderChart" style="min-width: 900px; height: 350px;"></canvas>
         </div>
     </div>
 
@@ -33,10 +33,12 @@
 <?php if (!empty($topUser)): ?>
     <div class="card mt-5 border-success shadow-lg">
         <div class="card-body text-success text-center">
-            <h4 class="card-title">Top Reminder User!</h4>
-            <p class="card-text fs-5 mb-1">
-                <strong><?php echo htmlspecialchars($topUser['username']); ?></strong> has created the most reminders!
-            </p>
+            <h4 class="card-title">
+                <p class="card-text fs-5 mb-1">
+                    <strong><?php echo htmlspecialchars($topUser['username']); ?></strong> has created the most reminders!
+                </p>
+            </h4>
+  
             <p class="mb-0">Total Reminders: <span class="fw-bold"><?php echo $topUser['reminder_count']; ?></span></p>
         </div>
     </div>
@@ -55,33 +57,33 @@
     const ctx = document.getElementById('reminderChart').getContext('2d');
 
     new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode(array_column($data['users'], 'username')) ?>,
-            datasets: [{
-                label: 'Number of Reminders',
-                data: <?= json_encode(array_column($data['users'], 'reminder_count')) ?>,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
+      type: 'bar',
+      data: {
+        labels: <?= json_encode(array_column($data['users'], 'username')) ?>,
+        datasets: [{
+          label: 'Number of Reminders',
+          data: <?= json_encode(array_column($data['users'], 'reminder_count')) ?>,
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 }
+          }
         },
-        options: {
-            indexAxis: 'y', // <-- Makes it horizontal
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 1 }
-                }
-            },
-            plugins: {
-                legend: { display: true },
-                tooltip: { enabled: true }
-            }
+        plugins: {
+          legend: { display: true },
+          tooltip: { enabled: true }
         }
+      }
     });
+
 
 </script>
 
