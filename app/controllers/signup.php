@@ -12,14 +12,14 @@ class Signup extends Controller {
         $user = $this->model('User');
         
         function is_password_strong($password) {
-         return strlen($password) >= 5 && preg_match('/\d/', $password);
+         return strlen($password) >= 5;
         }
         $username = trim($_POST['username']);
         $password = $_POST['password'];
         
         if (!empty($username) && !empty($password)) {
             if (!is_password_strong($password)) {   // Check if password is strong
-                $_SESSION['signup_message'] = "Password must be at least 5 characters and contain a number.";
+                $_SESSION['signup_message'] = "Password must be at least 5 characters";
                  header("Location: /signup");
                  exit;
             } 
