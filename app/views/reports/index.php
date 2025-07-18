@@ -18,4 +18,15 @@
         <?php endforeach; ?>
     </div>
 </div>
+<?php if (!empty($topUser)): ?>
+    <div class="card mt-5 border-success shadow-lg">
+        <div class="card-body text-success text-center">
+            <h4 class="card-title">Top Reminder User!</h4>
+            <p class="card-text fs-5 mb-1">
+                <strong><?php echo htmlspecialchars($topUser['username']); ?></strong> has created the most reminders!
+            </p>
+            <p class="mb-0">Total Reminders: <span class="fw-bold"><?php echo $topUser['reminder_count']; ?></span></p>
+        </div>
+    </div>
+<?php endif; ?>
 <?php require_once 'app/views/templates/footer.php'; ?>
