@@ -1,14 +1,20 @@
 <?php
 class Reports extends Controller {
-    public function index() {
-        session_start();
+  public function index() {
+      session_start();
 
-        $db = db_connect();
-        $stmt = $db->query("SELECT id, username FROM users ORDER BY username ASC");
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $db = db_connect();
+      $stmt = $db->query("
+          SELECT users.id, users.username, COUNT(notes.id) AS reminder_count
+          FROM users
+          LEFT JOIN notes ON notes.user_id = users.id
+          GROUP BY users.id, users.username
+          ORDER BY users.username ASC
+      ");
+      $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $this->view('reports/index', ['users' => $users]);
-    }
+      $this->view('reports/index', ['users' => $users]);
+  }
   
 
     public function user($id) {
