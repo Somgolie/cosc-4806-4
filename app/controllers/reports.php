@@ -1,6 +1,11 @@
 <?php
-class reports extends Controller {
+class Reports extends Controller {
   public function index() {
-    $this->view('reports/index');
+    session_start();
+
+    $reminderModel = $this->model('Reminder');
+    $reminders = $reminderModel->get_reminders();  // assumes this returns all reminders
+
+    $this->view('reports/index', ['reminders' => $reminders]);
   }
 }
