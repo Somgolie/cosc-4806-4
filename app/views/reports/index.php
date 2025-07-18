@@ -5,8 +5,11 @@
         <?php foreach ($data['users'] as $user): ?>
             <div class="col-md-4">
                 <div class="card mb-3">
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                        <span><?php echo htmlspecialchars($user['username']); ?></span>
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo htmlspecialchars($user['username']); ?></h5>
+                        <p class="card-text text-muted">
+                            Reminders: <?php echo $user['reminder_count']; ?>
+                        </p>
                         <a href="/reports/user/<?php echo $user['id']; ?>" class="btn btn-primary btn-sm">View</a>
                     </div>
                 </div>
