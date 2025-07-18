@@ -31,7 +31,7 @@ if (!isset($_SESSION['auth'])) {
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
              data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action 1</a></li>
+            <li><a class="dropdown-item" href="/reports/chart">Charts</a></li>
             <li><a class="dropdown-item" href="/reports">Reports</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/reminders">Reminder List</a></li>
