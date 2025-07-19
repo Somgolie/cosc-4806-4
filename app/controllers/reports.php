@@ -2,7 +2,12 @@
 class Reports extends Controller {
   public function index() {
     session_start();
-
+      
+      // ACL: Only allow "admin" user
+      if (!isset($_SESSION['auth']) || strtolower($_SESSION['username'] ?? '') !== 'admin') {
+          header('Location: /login');
+          exit;
+      }
     $db = db_connect();
 
     // Get all users with reminder count and login count
