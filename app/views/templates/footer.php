@@ -22,8 +22,8 @@
 <div class="main-content">
 
   <div class="container py-5">
-    <h1>Organize, Manage and create reminders today!</h1>
-    <p>Never miss a deadline again :)</p>
+    
+    
   </div>
 </div>
 

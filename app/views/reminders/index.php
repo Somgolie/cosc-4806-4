@@ -110,7 +110,7 @@
         echo "<p>No reminders found.</p>";
     }
     ?>
-        <?php require_once 'app/views/templates/footer.php'; ?>
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -122,3 +122,4 @@
       });
     </script>
 </div>
+<?php require_once 'app/views/templates/footer.php'; ?>
