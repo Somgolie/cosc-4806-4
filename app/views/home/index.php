@@ -5,9 +5,7 @@
     <p class="lead"><?= date("F jS, Y"); ?></p>
   </div>
 
-  <div class="mb-3">
-    <a href="/logout" class="btn btn-danger btn-lg">Logout</a>
-  </div>
+
 </div>
 
     <?php require_once 'app/views/templates/footer.php' ?>
