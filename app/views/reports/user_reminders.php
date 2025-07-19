@@ -1,5 +1,13 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 <div class="container mt-4">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/reports">Reports</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($data['username']); ?></li>
+        </ol>
+    </nav>
     <h2><?php echo htmlspecialchars($data['username']); ?>'s Reminders</h2>
     <a href="/reports" class="btn btn-secondary btn-sm mb-3">← Back to Users</a>
 

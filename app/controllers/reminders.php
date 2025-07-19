@@ -76,6 +76,7 @@ class reminders extends Controller{
       }
 
       $reminderModel->update_reminder($id, $subject);
+      
       $_SESSION['edit_message'] = "Reminder updated successfully!";
       header('Location: /reminders');
       exit;

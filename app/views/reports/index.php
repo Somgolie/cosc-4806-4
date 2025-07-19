@@ -1,6 +1,12 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 <div class="container mt-4">
-
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reports</li>
+        </ol>
+    </nav>
     <h2>All Users</h2>
 
     <!-- Chart Always Visible -->

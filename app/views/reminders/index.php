@@ -1,6 +1,43 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 <div class="container">
-    
+    <?php
+    session_start();
+
+    $toastClasses = [
+      'create_message' => 'bg-success',
+      'edit_message' => 'bg-info',
+      'delete_message' => 'bg-danger',
+      'complete_message' => 'bg-warning',
+    ];
+
+    $toastMessages = [];
+    foreach ($toastClasses as $key => $class) {
+        if (!empty($_SESSION[$key])) {
+            $toastMessages[] = [
+                'message' => $_SESSION[$key],
+                'class' => $class
+            ];
+            unset($_SESSION[$key]);
+        }
+    }
+    ?>
+
+    <?php if (!empty($toastMessages)): ?>
+      <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        <?php foreach ($toastMessages as $index => $toast): ?>
+          <div id="toast-<?php echo $index; ?>" 
+               class="toast align-items-center text-white <?php echo $toast['class']; ?> border-0 mb-2" 
+               role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">
+                <?php echo htmlspecialchars($toast['message']); ?>
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
     <div class="page-header d-flex justify-content-between align-items-center mb-4">
         <div class="row">
             <div class="col-lg-12">
@@ -74,4 +111,14 @@
     }
     ?>
         <?php require_once 'app/views/templates/footer.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var toastEls = document.querySelectorAll('.toast');
+        toastEls.forEach(function(toastEl) {
+          var toast = new bootstrap.Toast(toastEl);
+          toast.show();
+        });
+      });
+    </script>
 </div>
