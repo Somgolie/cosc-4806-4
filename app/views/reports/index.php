@@ -9,7 +9,7 @@
     </nav>
     <h2>All Users</h2>
 
-    <!-- Chart Always Visible -->
+    <!-- Chart!  -->
     <div class="mb-4">
         <div class="card card-body" style="overflow-x: auto; min-height: 350px; max-width: 100%;">
             <canvas id="reminderChart" style="min-width: 900px; height: 350px;"></canvas>
@@ -27,7 +27,7 @@
                             Reminders: <?php echo $user['reminder_count']; ?><br>
                             Logins: <?php echo $user['login_count']; ?>
                         </p>
-                        <a href="/reports/user/<?php echo $user['id']; ?>" class="btn btn-primary btn-sm">View</a>
+                        <a href="/reports/user/<?php echo $user['id']; ?>" class="btn btn-skyblue">View</a>
                     </div>
                 </div>
             </div>
@@ -66,13 +66,22 @@
       type: 'bar',
       data: {
         labels: <?= json_encode(array_column($data['users'], 'username')) ?>,
-        datasets: [{
-          label: 'Number of Reminders',
-          data: <?= json_encode(array_column($data['users'], 'reminder_count')) ?>,
-          backgroundColor: 'rgba(54, 162, 235, 0.6)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
+        datasets: [
+              {
+                label: 'Number of Reminders',
+                data: <?= json_encode(array_column($data['users'], 'reminder_count')) ?>,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+              },
+              {
+                label: 'Number of Logins',
+                data: <?= json_encode(array_column($data['users'], 'login_count')) ?>,
+                backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+              }
+            ]
       },
       options: {
         responsive: true,
@@ -93,10 +102,22 @@
 
 </script>
 
-<!-- Optional Chart Styling -->
+<!-- Styling -->
 <style>
     #reminderChart {
         min-width: 600px;
         min-height: 300px;
     }
+    
+    .btn-skyblue {
+      background-color: #87CEEB;
+      border-color: #87CEEB;
+      color: white;
+    }
+    .btn-skyblue:hover {
+      background-color: #6bbadf;
+      border-color: #6bbadf;
+      color: white;
+    }
+   
 </style>

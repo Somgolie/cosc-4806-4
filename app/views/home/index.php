@@ -21,7 +21,7 @@
       <div class="card border-light shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Need Help?</h5>
-          <p class="card-text">Visit our help page or contact your course coordinator.</p>
+          <p class="card-text">Visit our help page or contact our manager.</p>
           <a href="#" class="btn btn-outline-secondary">Help Center</a>
         </div>
       </div>
