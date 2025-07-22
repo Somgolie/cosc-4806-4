@@ -27,4 +27,38 @@ class omdb extends Controller {
 
         require_once 'app/views/home/movie.php';
     }
+
+    public function rate() {
+        session_start();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            require_once __DIR__ . '/../database.php';
+
+            $username = $_SESSION['username'] ?? null;
+            $movie = $_POST['movie'] ?? '';
+            $rating = intval($_POST['rating'] ?? 0);
+
+            if (!$username) {
+                die("You must be logged in to rate movies.");
+            }
+
+            if (!$movie || $rating < 1 || $rating > 5) {
+                die("Invalid movie title or rating.");
+            }
+
+            try {
+                $db = db_connect();
+                $stmt = $db->prepare("REPLACE INTO Movie_Ratings (username, movie, rating) VALUES (?, ?, ?)");
+                $stmt->execute([$username, $movie, $rating]);
+
+                header("Location: /omdb/search?title=" . urlencode($movie));
+                exit;
+            } catch (PDOException $e) {
+                die("Database error: " . $e->getMessage());
+            }
+        }
+
+        die("Invalid request");
+    }
+
 }
