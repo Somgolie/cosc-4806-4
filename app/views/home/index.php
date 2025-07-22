@@ -2,7 +2,7 @@
 
 <style>
   body {
-    background-color: #fdf6e3; /* cream */
+    background-color: #fefae0; /* cream */
     font-family: 'Segoe UI', sans-serif;
   }
 
