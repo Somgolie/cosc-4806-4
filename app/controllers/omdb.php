@@ -1,15 +1,30 @@
 <?php
 
-class omdb extends Controller{
-    public function index(){
-       $query_url = "http://www.omdbapi.com/?apikey=" . $_ENV['omdb_key'] . "&t=the+matrix&y=1999";
+class omdb extends Controller {
+    public function index() {
+        
+        header("Location: /");
+        exit;
+    }
 
-       $json = file_get_contents($query_url);
-       $phpObj = json_decode($json);
-       $movie =  (array) $phpObj;
+    public function search() {
+        if (!isset($_GET['title']) || empty(trim($_GET['title']))) {
+            die("Please enter a movie title.");
+        }
 
-       echo "<pre>";
-       print_r ($movie);
-       die;
+        $title = urlencode(trim($_GET['title']));
+        $apiKey = $_ENV['omdb_key'];
+        $query_url = "http://www.omdbapi.com/?apikey=$apiKey&t=$title";
+
+        $json = file_get_contents($query_url);
+        $phpObj = json_decode($json);
+
+        if (!$phpObj || $phpObj->Response === "False") {
+            die("Movie not found.");
+        }
+
+        $movie = (array) $phpObj;
+
+        require_once 'app/views/home/movie.php';
     }
 }
