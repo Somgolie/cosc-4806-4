@@ -25,8 +25,18 @@ class omdb extends Controller {
 
         $movie = (array) $phpObj;
 
-        require_once 'app/views/home/movie.php';
+        // Fetch average rating
+        require_once 'app/database.php';
+        $db = db_connect();
+        $stmt = $db->prepare("SELECT AVG(rating) as avg_rating FROM Movie_Ratings WHERE movie = ?");
+        $stmt->execute([$movie['Title']]);
+        $avg = $stmt->fetch(PDO::FETCH_ASSOC);
+        $average_rating = $avg['avg_rating'] ? number_format($avg['avg_rating'], 1) : null;
+
+        // Pass to view
+        require 'app/views/home/movie.php';
     }
+
 
     public function rate() {
         session_start();
