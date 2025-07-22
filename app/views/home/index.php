@@ -1,32 +1,61 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 
-<div class="container my-5">
-  <div class="bg-info text-white p-5 rounded shadow-sm mb-4">
-    <h1 class="display-4">Welcome <?= htmlspecialchars($_SESSION['username'] ?? 'Guest'); ?>!</h1>
-    <p class="lead"><?= date("F jS, Y"); ?></p>
-  </div>
+<style>
+  body {
+    background-color: #fdf6e3; /* cream */
+    font-family: 'Segoe UI', sans-serif;
+  }
 
-  <!-- placeholder content -->
-  <div class="row">
-    <div class="col-md-6 mb-4">
-      <div class="card border-light shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Quick Action</h5>
-          <p class="card-text">Let's start managing your reminders! Never miss a deadline again :)</p>
-          <a href="/reminders" class="btn btn-outline-primary">Go to Reminders</a>
-        </div>
-      </div>
+  .hero-center {
+    text-align: center;
+    padding: 100px 20px 60px;
+  }
+
+  .hero-center h1 {
+    font-size: 3.5rem;
+    color: #111;
+    font-weight: bold;
+  }
+
+  .hero-center p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  .search-bar {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .search-bar input {
+    border-radius: 0;
+    border: 2px solid #000;
+  }
+
+  .search-bar button {
+    border-radius: 0;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+  }
+
+  .search-bar button:hover {
+    background-color: #222;
+  }
+</style>
+
+<div class="container hero-center">
+  <h1>Movie Lookup</h1>
+  <p>Find ratings, details, and AI-generated reviews for any film!</p>
+
+  <form class="search-bar" method="GET" action="/omdb/search">
+    <div class="input-group">
+      <input type="text" name="title" class="form-control form-control-lg" placeholder="Enter a movie title..." required>
+      <button type="submit" class="btn btn-lg">Search</button>
     </div>
-    <div class="col-md-6 mb-4">
-      <div class="card border-light shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Need Help?</h5>
-          <p class="card-text">Visit our help page or contact our manager.</p>
-          <a href="#" class="btn btn-outline-secondary">Help Center</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  </form>
 </div>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
