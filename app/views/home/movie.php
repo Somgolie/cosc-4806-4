@@ -1,3 +1,4 @@
+<div class="movie-container">
 <h1><?= $movie['Title'] ?> (<?= $movie['Year'] ?>)</h1>
 
 <img src="<?= $movie['Poster'] ?>" alt="Poster" width="200">
@@ -49,3 +50,4 @@
     <p>No user ratings yet.</p>
 <?php endif; ?>
 
+</div>

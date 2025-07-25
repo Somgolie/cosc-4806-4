@@ -8,53 +8,70 @@ if (!isset($_SESSION['auth'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="/favicon.png">
-    <title>COSC 4806</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COSC 4806</title>
+  <link rel="icon" href="/favicon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f7f9fc;
+    }
+    .navbar-custom {
+      background: linear-gradient(90deg, #87CEEB, #00BFFF);
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+    }
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .btn-outline-light:hover {
+      background-color: #fff;
+      color: #007bff;
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg" style="background-color: #87CEEB; padding: 1rem 1.5rem;">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white fw-bold fs-4" href="#">COSC 4806</a>
+<nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" href="/home">
+      <i class="bi bi-film"></i> COSC 4806
+    </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-white"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Left Side Navigation -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5">
-          <li class="nav-item"><a class="nav-link text-white" href="/home">Home</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/about">About Me</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" 
-               data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">empty</a></li>
-              <li><a class="dropdown-item" href="#">empty</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/reminders">Reminder List</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link text-white" href="/reminders">Reminder List</a></li>
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Left side -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5">
+        <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About Me</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Placeholder 1</a></li>
+            <li><a class="dropdown-item" href="#">Placeholder 2</a></li>
+            <li><hr class="dropdown-divider"></li>
 
-        <!-- Right Side Buttons -->
-        <ul class="navbar-nav ms-auto align-items-center">
-          <?php if (isset($_SESSION['username']) && strtolower($_SESSION['username']) === 'admin'): ?>
-            <li class="nav-item me-3">
-              <a href="/reports" class="btn btn-outline-light px-4 py-2">Reports</a>
-            </li>
-          <?php endif; ?>
-          <li class="nav-item">
-            <a href="/logout" class="btn btn-danger px-4 py-2">Logout</a>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </li>
+
+      </ul>
+
+      <!-- Right side -->
+      <ul class="navbar-nav ms-auto align-items-center">
+        
+        <li class="nav-item">
+          <a href="/logout" class="btn btn-danger">Logout</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
