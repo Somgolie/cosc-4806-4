@@ -81,30 +81,29 @@
     <?php endif; ?>
 
     <?php if (!empty($user_ratings)): ?>
-      <ul class="list-group">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          <?php foreach ($user_ratings as $ur): ?>
-            <div class="col">
-              <div class="card bg-dark text-light h-100 shadow-sm border-0">
-                <div class="card-body">
-                  <h5 class="card-title mb-2"><?= htmlspecialchars($ur['username']) ?></h5>
-                  <p class="card-text">
-                    <?php
-                      $rating = (int) $ur['rating'];
-                      for ($i = 1; $i <= 5; $i++) {
-                          echo $i <= $rating
-                              ? '<i class="bi bi-star-fill text-warning"></i>'
-                              : '<i class="bi bi-star text-muted"></i>';
-                      }
-                    ?>
-                  </p>
-                </div>
+      <div class="row">
+        <?php foreach ($user_ratings as $ur): ?>
+          <div class="col-md-6 mb-4">
+            <div class="card bg-dark text-light border-light h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <?= htmlspecialchars($ur['username']) ?> rated: 
+                  <?php for ($i = 0; $i < $ur['rating']; $i++): ?>
+                    <i class="bi bi-star-fill text-warning"></i>
+                  <?php endfor; ?>
+                  <?php for ($i = $ur['rating']; $i < 5; $i++): ?>
+                    <i class="bi bi-star text-secondary"></i>
+                  <?php endfor; ?>
+                </h5>
+                <p class="card-text mt-2"><?= nl2br(htmlspecialchars($ur['review'] ?? '')) ?></p>
               </div>
             </div>
-          <?php endforeach; ?>
-        </div>
-      </ul>
+          </div>
+        <?php endforeach; ?>
+      </div>
     <?php else: ?>
+
+
       <p>No user ratings yet.</p>
     <?php endif; ?>
   </div>
