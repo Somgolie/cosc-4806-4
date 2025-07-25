@@ -50,12 +50,17 @@
   <h1>Movie Lookup</h1>
   <p>Find ratings, details, and AI-generated reviews for any film!</p>
 
-  <form class="search-bar" method="GET" action="/omdb/search">
-    <div class="input-group">
-      <input type="text" name="title" class="form-control form-control-lg" placeholder="Enter a movie title..." required>
-      <button type="submit" class="btn btn-lg">Search</button>
-    </div>
-  </form>
+    <form action="/omdb/search" method="get" class="d-flex justify-content-center my-4">
+      <input 
+        type="text" 
+        name="title" 
+        class="form-control form-control-lg rounded-pill me-2" 
+        placeholder="Search for a movie..." 
+        style="max-width: 400px;"
+        required
+      >
+      <button class="btn btn-outline-light rounded-pill" type="submit">Search</button>
+    </form>
 </div>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
