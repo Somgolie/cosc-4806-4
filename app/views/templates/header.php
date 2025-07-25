@@ -15,21 +15,49 @@ if (!isset($_SESSION['auth'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
+    :root {
+      --cream: #f5f5dc;
+      --black: #000000;
+    }
+
     body {
-      background-color: #f7f9fc;
+      background-color: var(--black);
+      color: var(--cream);
     }
+
     .navbar-custom {
-      background: linear-gradient(90deg, #87CEEB, #00BFFF);
+      background-color: var(--black);
     }
-    .navbar-brand, .nav-link {
-      color: #fff !important;
+
+    .navbar-brand,
+    .nav-link,
+    .dropdown-item {
+      color: var(--cream) !important;
     }
-    .nav-link:hover {
+
+    .nav-link:hover,
+    .dropdown-item:hover {
       text-decoration: underline;
+      background-color: #1a1a1a;
     }
+
+    .btn-outline-light {
+      color: var(--cream);
+      border-color: var(--cream);
+    }
+
     .btn-outline-light:hover {
-      background-color: #fff;
-      color: #007bff;
+      background-color: var(--cream);
+      color: var(--black);
+    }
+
+    .btn-danger {
+      background-color: #8b0000;
+      border: none;
+    }
+
+    .dropdown-menu {
+      background-color: var(--black);
     }
   </style>
 </head>
