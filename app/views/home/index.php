@@ -50,8 +50,8 @@
 </style>
 
 <div class="container hero-center">
-  <h1>Movie Lookup</h1>
-  <p>Find ratings, details, and AI-generated reviews for any film!</p>
+  <h1>Movie Hunter</h1>
+  <p>Find ratings, details, and reviews for (almost) any film!</p>
 
   <form action="/omdb/search" method="get" class="search-bar d-flex">
    <div class="col-12 d-flex justify-content-center">"

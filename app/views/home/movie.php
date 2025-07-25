@@ -19,7 +19,7 @@
   }
 
   .list-group-item {
-    background-color: #fffbe6; /* light cream for contrast */
+    background-color: #fffbe6; 
     color: #000;
   }
   .card.bg-dark .card-text {
@@ -125,6 +125,25 @@
     <?php else: ?>
       <p>No user ratings yet.</p>
     <?php endif; ?>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const stars = document.querySelectorAll('#star-rating i');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+          star.addEventListener('click', () => {
+            const val = star.getAttribute('data-value');
+            ratingInput.value = val;
+
+            stars.forEach(s => s.classList.replace('bi-star-fill', 'bi-star'));
+            for(let i = 0; i < val; i++) {
+              stars[i].classList.replace('bi-star', 'bi-star-fill');
+            }
+          });
+        });
+      });
+    </script>
   </div>
 </div>
 
@@ -170,20 +189,7 @@
   const stars = document.querySelectorAll('#star-rating i');
   const ratingInput = document.getElementById('rating');
 
-  stars.forEach(star => {
-    star.addEventListener('click', () => {
-      const val = star.getAttribute('data-value');
-      ratingInput.value = val;
 
-      // Reset all stars to empty
-      stars.forEach(s => s.classList.replace('bi-star-fill', 'bi-star'));
-
-      // Fill stars up to clicked one
-      for(let i = 0; i < val; i++) {
-        stars[i].classList.replace('bi-star', 'bi-star-fill');
-      }
-    });
-  });
 </script>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
