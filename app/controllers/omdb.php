@@ -39,8 +39,8 @@ class omdb extends Controller {
         $stmt->execute([$movie['Title']]);
         $user_ratings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        //AI review
-        $review = $this->generateMovieReview($movie['Title']);
+        //AI review for each user rating
+        $review = $this->generateMovieReview($movie['Title'],$userRating);
 
        
         require 'app/views/home/movie.php';
@@ -82,7 +82,7 @@ class omdb extends Controller {
         die("Invalid request");
     }
     
-    private function generateMovieReview($movieTitle) {
+    private function generateMovieReview($movieTitle,$userRating) {
         $apiKey =$_ENV['GEMINI']; // Replace with your actual key or use 
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
 
@@ -91,7 +91,7 @@ class omdb extends Controller {
                 [
                     "parts" => [
                         [
-                            "text" => "Give a short review of the movie titled '{$movieTitle}'."
+                            "text" => "Give a short review of the movie titled '{$movieTitle}' with an average rating of '{$userRating}' make sure to stay in character as a regular google review so no let me generate that or heres a short review."
                         ]
                     ]
                 ]

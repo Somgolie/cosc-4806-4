@@ -12,17 +12,16 @@
     <p><strong>Average Rating:</strong> No ratings yet.</p>
 <?php endif; ?>
 
-<h3>User Ratings:</h3>
-<?php if (!empty($user_ratings)): ?>
-    <ul>
-        <?php foreach ($user_ratings as $ur): ?>
-            <li><?= htmlspecialchars($ur['username']) ?> rated: <?= htmlspecialchars($ur['rating']) ?>/5</li>
-        <?php endforeach; ?>
-    </ul>
+
+
+<?php if (!empty($review)): ?>
+    <h3>AI Review:</h3>
+    <p><?= nl2br(htmlspecialchars($review)) ?></p>
 <?php else: ?>
-    <p>No user ratings yet.</p>
+    <p><em>No AI review available.</em></p>
 <?php endif; ?>
 
+<h3>User Ratings:</h3>
 <?php if (isset($_SESSION['username'])): ?>
     <form method="post" action="/omdb/rate">
         <input type="hidden" name="movie" value="<?= htmlspecialchars($movie['Title']) ?>">
@@ -39,9 +38,14 @@
     <p><em>Login to rate this movie.</em></p>
 <?php endif; ?>
 
-<?php if (!empty($review)): ?>
-    <h3>AI Review:</h3>
-    <p><?= nl2br(htmlspecialchars($review)) ?></p>
+
+<?php if (!empty($user_ratings)): ?>
+    <ul>
+        <?php foreach ($user_ratings as $ur): ?>
+            <li><?= htmlspecialchars($ur['username']) ?> rated: <?= htmlspecialchars($ur['rating']) ?>/5</li>
+        <?php endforeach; ?>
+    </ul>
 <?php else: ?>
-    <p><em>No AI review available.</em></p>
+    <p>No user ratings yet.</p>
 <?php endif; ?>
+
