@@ -25,17 +25,28 @@ class omdb extends Controller {
 
         $movie = (array) $phpObj;
 
-        // Fetch average rating
         require_once 'app/database.php';
         $db = db_connect();
+
+        // Get average rating
         $stmt = $db->prepare("SELECT AVG(rating) as avg_rating FROM Movie_Ratings WHERE movie = ?");
         $stmt->execute([$movie['Title']]);
         $avg = $stmt->fetch(PDO::FETCH_ASSOC);
         $average_rating = $avg['avg_rating'] ? number_format($avg['avg_rating'], 1) : null;
 
-        // Pass to view
+        // Get all user ratings for this movie
+        $stmt = $db->prepare("SELECT username, rating FROM Movie_Ratings WHERE movie = ?");
+        $stmt->execute([$movie['Title']]);
+        $user_ratings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        //AI review
+        $review = $this->generateMovieReview($movie['Title']);
+
+       
         require 'app/views/home/movie.php';
     }
+
+
 
 
     public function rate() {
@@ -69,6 +80,39 @@ class omdb extends Controller {
         }
 
         die("Invalid request");
+    }
+    
+    private function generateMovieReview($movieTitle) {
+        $apiKey =$_ENV['GEMINI']; // Replace with your actual key or use 
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
+
+        $data = [
+            "contents" => [
+                [
+                    "parts" => [
+                        [
+                            "text" => "Give a short review of the movie titled '{$movieTitle}'."
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'X-goog-api-key: ' . $apiKey
+        ]);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $result = json_decode($response, true);
+
+        return $result['candidates'][0]['content']['parts'][0]['text'] ?? "No review available.";
     }
 
 }
