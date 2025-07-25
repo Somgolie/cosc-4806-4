@@ -35,13 +35,14 @@ class omdb extends Controller {
         $average_rating = $avg['avg_rating'] ? number_format($avg['avg_rating'], 1) : null;
 
         // Get all user ratings for this movie
-        $stmt = $db->prepare("SELECT username, rating FROM Movie_Ratings WHERE movie = ?");
+        $stmt = $db->prepare("SELECT username, rating, review FROM Movie_Ratings WHERE movie = ?");
         $stmt->execute([$movie['Title']]);
         $user_ratings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
 
-        //AI review for each user rating
-        $review = $this->generateMovieReview($movie['Title'],$userRating);
-
+        //AI review
+        $review = $this->generateMovieReview($movie['Title'],$average_rating);
+        
        
         require 'app/views/home/movie.php';
     }
@@ -69,8 +70,13 @@ class omdb extends Controller {
 
             try {
                 $db = db_connect();
-                $stmt = $db->prepare("REPLACE INTO Movie_Ratings (username, movie, rating) VALUES (?, ?, ?)");
-                $stmt->execute([$username, $movie, $rating]);
+
+                // AI review for the individual rating
+                $aiReview = $this->generateUserReview($movie, $rating);
+
+                // Save rating and review
+                $stmt = $db->prepare("REPLACE INTO Movie_Ratings (username, movie, rating, review) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$username, $movie, $rating, $aiReview]);
 
                 header("Location: /omdb/search?title=" . urlencode($movie));
                 exit;
@@ -81,8 +87,9 @@ class omdb extends Controller {
 
         die("Invalid request");
     }
+
     
-    private function generateMovieReview($movieTitle,$userRating) {
+    private function generateMovieReview($movieTitle,$AveRating) {
         $apiKey =$_ENV['GEMINI']; 
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
 
@@ -91,7 +98,7 @@ class omdb extends Controller {
                 [
                     "parts" => [
                         [
-                            "text" => "Give a short review of the movie titled '{$movieTitle}' with an average rating of '{$userRating}' as an over view of the reviews never say let me generate that or heres a short review."
+                            "text" => "Give a short review of the movie titled '{$movieTitle}' with an average rating of '{$AveRating}' as an over view of the reviews never say let me generate that or heres a short review."
                         ]
                     ]
                 ]
@@ -114,5 +121,39 @@ class omdb extends Controller {
 
         return $result['candidates'][0]['content']['parts'][0]['text'] ?? "No review available.";
     }
+
+    private function generateUserReview($movieTitle, $rating) {
+        $apiKey = $_ENV['GEMINI'];
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
+
+        $data = [
+            "contents" => [
+                [
+                    "parts" => [
+                        [
+                            "text" => "Write a very short, user review of the movie '{$movieTitle}' by someone who rated it {$rating} star(s). The tone should reflect that rating."
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'X-goog-api-key: ' . $apiKey
+        ]);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $result = json_decode($response, true);
+
+        return $result['candidates'][0]['content']['parts'][0]['text'] ?? "No review.";
+    }
+
 
 }

@@ -82,11 +82,27 @@
 
     <?php if (!empty($user_ratings)): ?>
       <ul class="list-group">
-        <?php foreach ($user_ratings as $ur): ?>
-          <li class="list-group-item bg-dark text-light">
-            <?= htmlspecialchars($ur['username']) ?> rated: <?= htmlspecialchars($ur['rating']) ?>/5
-          </li>
-        <?php endforeach; ?>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <?php foreach ($user_ratings as $ur): ?>
+            <div class="col">
+              <div class="card bg-dark text-light h-100 shadow-sm border-0">
+                <div class="card-body">
+                  <h5 class="card-title mb-2"><?= htmlspecialchars($ur['username']) ?></h5>
+                  <p class="card-text">
+                    <?php
+                      $rating = (int) $ur['rating'];
+                      for ($i = 1; $i <= 5; $i++) {
+                          echo $i <= $rating
+                              ? '<i class="bi bi-star-fill text-warning"></i>'
+                              : '<i class="bi bi-star text-muted"></i>';
+                      }
+                    ?>
+                  </p>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
       </ul>
     <?php else: ?>
       <p>No user ratings yet.</p>
