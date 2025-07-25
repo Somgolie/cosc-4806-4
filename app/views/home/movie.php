@@ -59,25 +59,29 @@
     <h3>User Ratings:</h3>
 
     <?php if (isset($_SESSION['username'])): ?>
-      <form method="post" action="/omdb/rate" class="mb-4">
-        <input type="hidden" name="movie" value="<?= htmlspecialchars($movie['Title']) ?>">
-        <div class="row g-2 align-items-center">
-          <div class="col-auto">
-            <label for="rating" class="col-form-label">Rate this movie:</label>
-          </div>
-          <div class="col-auto">
-            <select name="rating" id="rating" class="form-select form-select-lg rounded-pill border-dark bg-light text-dark" style="min-width: 150px;" required>
-              <option value="" disabled selected>Rate (1–5)</option>
-              <?php for ($i = 1; $i <= 5; $i++): ?>
-                <option value="<?= $i ?>"><?= $i ?> Star<?= $i > 1 ? 's' : '' ?></option>
-              <?php endfor; ?>
-            </select>
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-dark px-4 py-2 rounded-pill">Submit Rating</button>
-          </div>
-        </div>
-      </form>
+  <form method="post" action="/omdb/rate" class="mb-4">
+    <input type="hidden" name="movie" value="<?= htmlspecialchars($movie['Title']) ?>">
+    <input type="hidden" name="rating" id="rating" required>
+
+    <div class="row g-2 align-items-center">
+      <div class="col-auto">
+        <label for="rating" class="col-form-label">Rate this movie:</label>
+      </div>
+
+      <div id="star-rating" class="mb-3" style="font-size: 2rem; cursor: pointer; color: #ffc107;">
+        <i class="bi bi-star" data-value="1"></i>
+        <i class="bi bi-star" data-value="2"></i>
+        <i class="bi bi-star" data-value="3"></i>
+        <i class="bi bi-star" data-value="4"></i>
+        <i class="bi bi-star" data-value="5"></i>
+      </div>
+
+      <div class="col-auto">
+        <button type="submit" class="btn btn-dark px-4 py-2 rounded-pill">Submit Rating</button>
+      </div>
+    </div>
+  </form>
+
     <?php else: ?>
       <p><em>Login to rate this movie.</em></p>
     <?php endif; ?>
@@ -162,6 +166,11 @@
   };
 
   new Chart(ctx, config);
+
+  const stars = document.querySelectorAll('#star-rating i');
+  const ratingInput = document.getElementById('rating');
+
+
 </script>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
