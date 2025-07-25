@@ -66,7 +66,7 @@ if (!isset($_SESSION['auth'])) {
 <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
   <div class="container">
     <a class="navbar-brand fw-bold fs-4" href="/home">
-      <i class="bi bi-film"></i> COSC 4806
+      <i class="bi bi-film"></i> Movie Hunter
     </a>
 
     <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" 
