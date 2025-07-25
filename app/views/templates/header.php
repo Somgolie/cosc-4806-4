@@ -63,6 +63,7 @@ if (!isset($_SESSION['auth'])) {
       background-color: var(--black);
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">

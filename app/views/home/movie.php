@@ -1,14 +1,13 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 <style>
   body {
-    background-color: #f5f5dc;
+    background-color: #f5f5dc; /* cream */
     color: #000;
   }
 
   .movie-container p,
   .movie-container h1,
   .movie-container h3,
-  .movie-container li,
   .movie-container label {
     color: #000 !important;
   }
@@ -23,15 +22,18 @@
     background-color: #fffbe6; /* light cream for contrast */
     color: #000;
   }
+  .card-text {
+    color: #f8f9fa !important; /* Bootstrap light text color */
+  }
 </style>
 
-<div class="container py-5">
+<div class="container py-5 movie-container">
   <div class="row">
     <div class="col-md-4 text-center mb-4">
-      <img src="<?= $movie['Poster'] ?>" alt="Poster" class="img-fluid rounded shadow">
+      <img src="<?= htmlspecialchars($movie['Poster']) ?>" alt="Poster" class="img-fluid rounded shadow">
     </div>
     <div class="col-md-8">
-      <h1 class="mb-3"><?= $movie['Title'] ?> (<?= $movie['Year'] ?>)</h1>
+      <h1 class="mb-3"><?= htmlspecialchars($movie['Title']) ?> (<?= htmlspecialchars($movie['Year']) ?>)</h1>
       <p><strong>Genre:</strong> <?= htmlspecialchars($movie['Genre']) ?></p>
       <p><strong>Plot:</strong> <?= htmlspecialchars($movie['Plot']) ?></p>
       <p><strong>Actors:</strong> <?= htmlspecialchars($movie['Actors']) ?></p>
@@ -82,12 +84,22 @@
 
     <?php if (!empty($user_ratings)): ?>
       <div class="row">
+        <?php
+          // Prepare rating counts for chart
+          $rating_counts = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+          foreach ($user_ratings as $ur) {
+              $r = intval($ur['rating']);
+              if ($r >= 1 && $r <= 5) {
+                  $rating_counts[$r]++;
+              }
+          }
+        ?>
         <?php foreach ($user_ratings as $ur): ?>
           <div class="col-md-6 mb-4">
             <div class="card bg-dark text-light border-light h-100">
               <div class="card-body">
                 <h5 class="card-title">
-                  <?= htmlspecialchars($ur['username']) ?> rated: 
+                  <?= htmlspecialchars($ur['username']) ?> rated:
                   <?php for ($i = 0; $i < $ur['rating']; $i++): ?>
                     <i class="bi bi-star-fill text-warning"></i>
                   <?php endfor; ?>
@@ -101,12 +113,53 @@
           </div>
         <?php endforeach; ?>
       </div>
+
+      <h3 class="mt-5">Rating Distribution</h3>
+      <canvas id="ratingChart" style="max-width: 400px;"></canvas>
     <?php else: ?>
-
-
       <p>No user ratings yet.</p>
     <?php endif; ?>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('ratingChart').getContext('2d');
+  const ratingData = {
+    labels: ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'],
+    datasets: [{
+      label: 'Number of Ratings',
+      data: <?= json_encode(array_values($rating_counts)) ?>,
+      backgroundColor: [
+        '#dc3545', // red
+        '#fd7e14', // orange
+        '#ffc107', // yellow
+        '#198754', // green
+        '#0d6efd'  // blue
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: ratingData,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          precision: 0
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  };
+
+  new Chart(ctx, config);
+</script>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
