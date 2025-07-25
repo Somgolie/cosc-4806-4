@@ -62,6 +62,9 @@ if (!isset($_SESSION['auth'])) {
     .dropdown-menu {
       background-color: var(--black);
     }
+    .card-text {
+      color: #f8f9fa !important; 
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>

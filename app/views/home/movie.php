@@ -22,8 +22,8 @@
     background-color: #fffbe6; /* light cream for contrast */
     color: #000;
   }
-  .card-text {
-    color: #f8f9fa !important; /* Bootstrap light text color */
+  .card.bg-dark .card-text {
+    color: #f8f9fa !important;
   }
 </style>
 
@@ -107,7 +107,7 @@
                     <i class="bi bi-star text-secondary"></i>
                   <?php endfor; ?>
                 </h5>
-                <p class="card-text mt-2"><?= nl2br(htmlspecialchars($ur['review'] ?? '')) ?></p>
+                <p class="card-text mt-2 text-light"><?= nl2br(htmlspecialchars($ur['review'] ?? '')) ?></p>
               </div>
             </div>
           </div>
@@ -115,7 +115,9 @@
       </div>
 
       <h3 class="mt-5">Rating Distribution</h3>
-      <canvas id="ratingChart" style="max-width: 400px;"></canvas>
+      <div class="w-100 w-md-50" style="max-width: 400px;">
+        <canvas id="ratingChart"></canvas>
+      </div>
     <?php else: ?>
       <p>No user ratings yet.</p>
     <?php endif; ?>
