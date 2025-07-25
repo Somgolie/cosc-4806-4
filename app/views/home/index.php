@@ -25,24 +25,27 @@
   }
 
   .search-bar {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
-  .search-bar input {
-    border-radius: 0;
+  .search-bar input.form-control {
+    border-radius: 50px;
     border: 2px solid #000;
+    padding: 0.75rem 1.5rem;
   }
 
-  .search-bar button {
-    border-radius: 0;
+  .search-bar button.btn {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
     background-color: #000;
     color: #fff;
     border: 2px solid #000;
+    transition: background-color 0.3s ease;
   }
 
-  .search-bar button:hover {
-    background-color: #222;
+  .search-bar button.btn:hover {
+    background-color: #333;
   }
 </style>
 
@@ -50,17 +53,19 @@
   <h1>Movie Lookup</h1>
   <p>Find ratings, details, and AI-generated reviews for any film!</p>
 
-    <form action="/omdb/search" method="get" class="d-flex justify-content-center my-4">
-      <input 
-        type="text" 
-        name="title" 
-        class="form-control form-control-lg rounded-pill me-2" 
-        placeholder="Search for a movie..." 
-        style="max-width: 400px;"
-        required
-      >
-      <button class="btn btn-outline-light rounded-pill" type="submit">Search</button>
-    </form>
+  <form action="/omdb/search" method="get" class="search-bar d-flex">
+   <div class="col-12 d-flex justify-content-center">"
+    <input 
+      type="text" 
+      name="title" 
+      class="form-control me-2"
+      placeholder="Search for a movie..." 
+      required
+    >
+   </div>
+    <button type="submit" class="btn">Search</button>
+  </form>
+  
 </div>
 
 <?php require_once 'app/views/templates/footer.php'; ?>

@@ -64,7 +64,7 @@ if (!isset($_SESSION['auth'])) {
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand fw-bold fs-4" href="/home">
       <i class="bi bi-film"></i> Movie Hunter
     </a>
@@ -81,8 +81,7 @@ if (!isset($_SESSION['auth'])) {
         <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/about">About Me</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
+
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Placeholder 1</a></li>
             <li><a class="dropdown-item" href="#">Placeholder 2</a></li>
@@ -95,7 +94,6 @@ if (!isset($_SESSION['auth'])) {
 
       <!-- Right side -->
       <ul class="navbar-nav ms-auto align-items-center">
-        
         <li class="nav-item">
           <a href="/logout" class="btn btn-danger">Logout</a>
         </li>
