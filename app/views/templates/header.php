@@ -23,6 +23,9 @@ if (!isset($_SESSION['auth'])) {
     body {
       background-color: var(--black);
       color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .navbar-custom {
@@ -62,42 +65,28 @@ if (!isset($_SESSION['auth'])) {
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold fs-4" href="/home">
-      <i class="bi bi-film"></i> Movie Hunter
-    </a>
-
-    <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
-            aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon text-white"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Left side -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5">
-        <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/about">About Me</a></li>
-        <li class="nav-item dropdown">
-
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Placeholder 1</a></li>
-            <li><a class="dropdown-item" href="#">Placeholder 2</a></li>
-            <li><hr class="dropdown-divider"></li>
-
-          </ul>
-        </li>
-
-      </ul>
-
-      <!-- Right side -->
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item">
-          <a href="/logout" class="btn btn-danger">Logout</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold fs-4" href="/home">
+        <i class="bi bi-film"></i> Movie Hunter
+      </a>
+      <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon text-white"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5">
+          <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About Me</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a href="/logout" class="btn btn-danger">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+
+  <div class="container py-5"><!-- open main content container -->

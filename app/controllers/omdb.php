@@ -91,7 +91,7 @@ class omdb extends Controller {
                 [
                     "parts" => [
                         [
-                            "text" => "Give a short review of the movie titled '{$movieTitle}' with an average rating of '{$userRating}' make sure to stay in character as a regular google review so no let me generate that or heres a short review."
+                            "text" => "Give a short review of the movie titled '{$movieTitle}' with an average rating of '{$userRating}' as an over view of the reviews never say let me generate that or heres a short review."
                         ]
                     ]
                 ]

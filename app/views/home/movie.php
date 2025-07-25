@@ -1,4 +1,29 @@
 <?php require_once 'app/views/templates/header.php'; ?>
+<style>
+  body {
+    background-color: #f5f5dc;
+    color: #000;
+  }
+
+  .movie-container p,
+  .movie-container h1,
+  .movie-container h3,
+  .movie-container li,
+  .movie-container label {
+    color: #000 !important;
+  }
+
+  select,
+  input,
+  button {
+    color: #000;
+  }
+
+  .list-group-item {
+    background-color: #fffbe6; /* light cream for contrast */
+    color: #000;
+  }
+</style>
 
 <div class="container py-5">
   <div class="row">
@@ -18,7 +43,7 @@
       <?php endif; ?>
 
       <?php if (!empty($review)): ?>
-        <h3 class="mt-4">AI Review:</h3>
+        <h3 class="mt-4">Review Overview:</h3>
         <p><?= nl2br(htmlspecialchars($review)) ?></p>
       <?php else: ?>
         <p><em>No AI review available.</em></p>
