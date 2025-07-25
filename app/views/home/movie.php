@@ -170,7 +170,20 @@
   const stars = document.querySelectorAll('#star-rating i');
   const ratingInput = document.getElementById('rating');
 
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const val = star.getAttribute('data-value');
+      ratingInput.value = val;
 
+      // Reset all stars to empty
+      stars.forEach(s => s.classList.replace('bi-star-fill', 'bi-star'));
+
+      // Fill stars up to clicked one
+      for(let i = 0; i < val; i++) {
+        stars[i].classList.replace('bi-star', 'bi-star-fill');
+      }
+    });
+  });
 </script>
 
 <?php require_once 'app/views/templates/footer.php'; ?>
