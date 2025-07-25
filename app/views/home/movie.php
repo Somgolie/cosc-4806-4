@@ -43,7 +43,7 @@
       <?php endif; ?>
 
       <?php if (!empty($review)): ?>
-        <h3 class="mt-4">Review Overview:</h3>
+        <h3 class="mt-4">Audience Overview:</h3>
         <p><?= nl2br(htmlspecialchars($review)) ?></p>
       <?php else: ?>
         <p><em>No AI review available.</em></p>
@@ -64,15 +64,15 @@
             <label for="rating" class="col-form-label">Rate this movie:</label>
           </div>
           <div class="col-auto">
-            <select name="rating" id="rating" class="form-select" required>
-              <option value="">--Choose--</option>
+            <select name="rating" id="rating" class="form-select form-select-lg rounded-pill border-dark bg-light text-dark" style="min-width: 150px;" required>
+              <option value="" disabled selected>Rate (1–5)</option>
               <?php for ($i = 1; $i <= 5; $i++): ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
+                <option value="<?= $i ?>"><?= $i ?> Star<?= $i > 1 ? 's' : '' ?></option>
               <?php endfor; ?>
             </select>
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-outline-light">Submit Rating</button>
+            <button type="submit" class="btn btn-dark px-4 py-2 rounded-pill">Submit Rating</button>
           </div>
         </div>
       </form>

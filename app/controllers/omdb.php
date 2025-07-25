@@ -83,7 +83,7 @@ class omdb extends Controller {
     }
     
     private function generateMovieReview($movieTitle,$userRating) {
-        $apiKey =$_ENV['GEMINI']; // Replace with your actual key or use 
+        $apiKey =$_ENV['GEMINI']; 
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
 
         $data = [
