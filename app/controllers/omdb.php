@@ -53,11 +53,6 @@ class omdb extends Controller {
     public function rate() {
         session_start();
 
-        if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== 1) {
-            $_SESSION['toast_message'] = "You must be logged in to rate a movie.";
-            header('Location: ' . $_SERVER['HTTP_REFERER']);  // redirect back to the page user came from
-            exit;
-        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             require_once __DIR__ . '/../database.php';
 
@@ -70,16 +65,16 @@ class omdb extends Controller {
             }
 
             if (!$movie || $rating < 1 || $rating > 5) {
-                die("Invalid movie title or rating.");
+                $_SESSION['toast_message'] = "Invalid rating, please select a star.";
+                header("Location: /omdb/search?title=" . urlencode($movie));  // Redirect back to movie
+                exit;
             }
 
             try {
                 $db = db_connect();
 
-                // AI review for the individual rating
                 $aiReview = $this->generateUserReview($movie, $rating);
 
-                // Save rating and review
                 $stmt = $db->prepare("REPLACE INTO Movie_Ratings (username, movie, rating, review) VALUES (?, ?, ?, ?)");
                 $stmt->execute([$username, $movie, $rating, $aiReview]);
 
