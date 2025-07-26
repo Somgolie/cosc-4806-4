@@ -19,7 +19,7 @@ class omdb extends Controller {
         $json = file_get_contents($query_url);
         $phpObj = json_decode($json);
 
-        if (!$phpObj || $phpObj->Response === "False") {
+        if (!$phpObj || $phpObj->Response == "False") {
             die("Movie not found.");
         }
 

@@ -5,6 +5,9 @@
     background-color: #fefae0; /* cream */
     font-family: 'Segoe UI', sans-serif;
   }
+  .black-text{
+    color: #000;
+  }
 
   .hero-center {
     text-align: center;
@@ -51,21 +54,23 @@
 
 <div class="container hero-center">
   <h1>Movie Hunter</h1>
+  <h5 class="black-text">
+    Welcome, <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest' ?>!
+  </h5>
   <p>Find ratings, details, and reviews for (almost) any film!</p>
 
   <form action="/omdb/search" method="get" class="search-bar d-flex">
-   <div class="col-12 d-flex justify-content-center">"
-    <input 
-      type="text" 
-      name="title" 
-      class="form-control me-2"
-      placeholder="Search for a movie..." 
-      required
-    >
-   </div>
+    <div class="col-12 d-flex justify-content-center">
+      <input 
+        type="text" 
+        name="title" 
+        class="form-control me-2"
+        placeholder="Search for a movie..." 
+        required
+      >
+    </div>
     <button type="submit" class="btn">Search</button>
   </form>
-  
 </div>
 
 <?php require_once 'app/views/templates/footer.php'; ?>

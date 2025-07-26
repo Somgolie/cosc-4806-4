@@ -36,4 +36,6 @@
 			</a>
 	</div>
 </div>
-<?php require_once 'app/views/templates/footer.php' ?>
+	<form method="post" action="/login/guest">
+		<button type="submit" class="btn btn-secondary mt-3">Continue as Guest</button>
+	</form>

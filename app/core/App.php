@@ -2,7 +2,7 @@
 
 class App {
 
-    protected $controller = 'login';
+    protected $controller = 'home';
     protected $method = 'index';
     protected $special_url = ['apply'];
     protected $params = [];
@@ -12,7 +12,7 @@ class App {
 
         // If URL is empty
         if (empty($url) || !isset($url[0]) || $url[0] === '') {
-            $url[0] = $this->controller;
+            $url[0] = 'home';  // default to home, not login
         }
 
         // Check if actually controller file exists
