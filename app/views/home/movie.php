@@ -191,5 +191,16 @@
 
 
 </script>
+<?php if (isset($_SESSION['toast_message'])): ?>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toastMessage = <?= json_encode($_SESSION['toast_message']) ?>;
+      
+      alert(toastMessage);
 
+      
+      <?php unset($_SESSION['toast_message']); ?>
+    });
+  </script>
+<?php endif; ?>
 <?php require_once 'app/views/templates/footer.php'; ?>

@@ -53,6 +53,11 @@ class omdb extends Controller {
     public function rate() {
         session_start();
 
+        if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== 1) {
+            $_SESSION['toast_message'] = "You must be logged in to rate a movie.";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);  // redirect back to the page user came from
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             require_once __DIR__ . '/../database.php';
 

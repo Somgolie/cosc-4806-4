@@ -1,10 +1,26 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 
 <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
   body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #fefae0; /* cream */
     font-family: 'Segoe UI', sans-serif;
   }
+
+  .container {
+    flex: 1 0 auto; 
+  }
+
+  footer {
+    flex-shrink: 0; 
+  }
+
   .black-text{
     color: #000;
   }
