@@ -65,7 +65,7 @@ class omdb extends Controller {
             }
 
             if (!$movie || $rating < 1 || $rating > 5) {
-                $_SESSION['toast_message'] = "Invalid rating, please select a star.";
+                
                 header("Location: /omdb/search?title=" . urlencode($movie));  // Redirect back to movie
                 exit;
             }
