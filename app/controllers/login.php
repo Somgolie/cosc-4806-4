@@ -17,7 +17,7 @@ class Login extends Controller {
 			$user->authenticate($username, $password); 
     }
 	public function guest() {
-			$_SESSION['auth'] = 0; // Not authenticated, but still a session
+			$_SESSION['auth'] = 0; 
 			$_SESSION['username'] = 'Guest';
 			$_SESSION['user_id'] = null;
 			header('Location: /home');

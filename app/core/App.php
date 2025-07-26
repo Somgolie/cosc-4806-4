@@ -42,7 +42,7 @@ class App {
             }
         }
 
-        // Rebase params array to have sequential indexes starting at 0
+        
         $this->params = $url ? array_values($url) : [];
 
         // Call controller method with params

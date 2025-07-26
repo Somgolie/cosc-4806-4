@@ -1,4 +1,4 @@
-  </div><!-- close container -->
+  </div>
 
   <footer class="py-4 text-center" style="background-color: #111; color: var(--cream);">
     <div class="container">

@@ -1,7 +1,7 @@
 <?php require_once 'app/views/templates/header.php'; ?>
 <style>
   body {
-    background-color: #f5f5dc; /* cream */
+    background-color: #f5f5dc; 
     color: #000;
   }
 
