@@ -10,7 +10,7 @@ if (!isset($_SESSION['auth'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>COSC 4806</title>
+  <title>Movie Hunter</title>
   <link rel="icon" href="/favicon.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
@@ -86,11 +86,14 @@ if (!isset($_SESSION['auth'])) {
         </ul>
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
-            <a href="/logout" class="btn btn-danger">Logout</a>
+            <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] == 1): ?>
+              <a href="/logout" class="btn btn-danger btn-lg px-4 py-2">Logout</a>
+            <?php else: ?>
+              <a href="/logout" class="btn btn-primary btn-lg px-4 py-2">Login</a>
+            <?php endif; ?>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
-  <div class="container py-5"><!-- open main content container -->
+  <div class="container py-5">
