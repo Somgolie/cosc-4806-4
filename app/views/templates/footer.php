@@ -7,7 +7,7 @@
         <a href="#">Privacy Policy</a> |
         <a href="#">Help Center</a>
       </div>
-      <p class="mb-0">&copy; <?= date('Y') ?> COSC 4806 Student Portal. All rights reserved.</p>
+      <p class="mb-0">&copy; <?= date('Y') ?> Final Project. All rights reserved.</p>
     </div>
   </footer>
 
